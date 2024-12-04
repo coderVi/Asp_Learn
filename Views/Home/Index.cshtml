@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = null;
+}
+@model IslemModel
+@* yukarıda IslemModel.cs isimli class a yönlendirme yapıyoruz, class içinde ki proplara erişim sağlıyoruz *@
+<div class="text-center">
+    <h2> @DateTime.Now.DayOfWeek </h2>
+    <form  asp-action="Islem" method="post">
+        @* asp-action ile Controller içerisinde ki Islem isimli Action Method una yönlemdirme yapıyor*@
+        <p>İlk Sayı : </p>
+        <input type="text" class="form-control" name="S1" value="@if (Model != null)@Model.Result" />
+        @* input alanında ki değerimizin name adını IslemModel.cs de ki prop un adına göre veriyoruz ki orada ki veriyi değiştirsin. *@
+        <br />
+        <p>İkinci Sayı : </p>
+        <input type="text" class="form-control" name="S2" /> <br />
+
+        <button class="btn btn-primary" type="submit" name="Oprt" value="+"> + </button>
+        @* value kısmı Controller da veriyi hangi isimle karşılayacağını tanımlıyoruz *@
+        <button class="btn btn-primary" type="submit" name="Oprt" value="-"> - </button>
+        <button class="btn btn-primary" type="submit" name="Oprt" value="*"> x </button>
+        <button class="btn btn-primary" type="submit" name="Oprt" value="/"> / </button>
+        <button class="btn btn-primary" type="submit" name="Oprt" value="%"> % </button>
+    </form>
+
+    @if (Model != null)
+    {
+        <h2> Sonuç : @Model.Result </h2>
+    }
+    else
+    {
+        <h2> Lütfen işlem yapınız. </h2>
+    }
+    @* Model Kısmında veri null olarak geliyorsa Else bloğuna takılıyor ve Controller da ise ilk işlemi modeli boş göstererek yaptığımız için burada komrtol mekanizması kullanıyoruz *@
+</div>
+
